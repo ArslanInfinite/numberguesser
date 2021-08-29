@@ -19,5 +19,15 @@ maxNum.textContent = max
 // listening for guess input 
 
 guessButton.addEventListener('click', function(){
-    console.log(guessInput.value)
+    // the comparison needs to be a Number, not String, so it needs to be parsed as an integer
+    let guess = parseInt(guessInput.value)
+
+    // validating the input to meet parameters
+    if(guess === NaN || guess < min || guess > max){
+        setMessage(`Please enter a number between ${min} and ${max}`)
+    }
 })
+
+function setMessage(msg){
+    message.textContent = msg
+}
