@@ -28,14 +28,25 @@ guessButton.addEventListener('click', function(){
     }
     // checking if value is 1
     if(guess === winningNum){
-        // disabling input 
+        // disabling input so no more guesses can be entered
         guessInput.disabled = true 
         // adding green border when guess is correct
         guessInput.style.borderColor = 'green'
         // setting message to tell user they won
         setMessage(`${winningNum} is correct!, YOU WIN!`, 'green')
     } else {
+        // wrong number, reducing amount of guesses until none are left
+        guessesLeft -= 1
+        if(guessesLeft === 0){
+        // disabling input so no more guesses can be entered
+        guessInput.disabled = true 
+        // adding green border when guess is correct
+        guessInput.style.borderColor = 'red'
+        // setting message to tell user they won
+        setMessage(`Game Over, you lost. The correct number was ${winningNum}`, 'red')
+        } else {
 
+        }
     }
 })
 
