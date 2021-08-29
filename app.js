@@ -23,11 +23,12 @@ guessButton.addEventListener('click', function(){
     let guess = parseInt(guessInput.value)
 
     // validating the input to meet parameters
-    if(guess === NaN || guess < min || guess > max){
+    if(isNaN(guess) || guess < min || guess > max){
         setMessage(`Please enter a number between ${min} and ${max}`)
     }
 })
 
 function setMessage(msg){
+    message.style.color = 'red'
     message.textContent = msg
 }
