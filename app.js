@@ -28,26 +28,18 @@ guessButton.addEventListener('click', function(){
     }
     // checking if value is 1
     if(guess === winningNum){
-        // disabling input so no more guesses can be entered
-        guessInput.disabled = true 
-        // adding green border when guess is correct
-        guessInput.style.borderColor = 'green'
-        // setting message to tell user they won
-        setMessage(`${winningNum} is correct!, YOU WIN!`, 'green')
+        gameOver(true, `${winningNum} is correct, YOU WIN!`)
     } else {
         // wrong number, reducing amount of guesses until none are left
         guessesLeft -= 1
         if(guessesLeft === 0){
-        // disabling input so no more guesses can be entered
-        guessInput.disabled = true 
-        // adding red border when guess is incorrect
-        guessInput.style.borderColor = 'red'
-        // setting message to tell user they won
-        setMessage(`Game Over, you lost. The correct number was ${winningNum}`, 'red')
+        gameOver(false, `Game Over, you lost. The correct number was ${winningNum}`)
         } else {
         // guess wrong, game continues
         // adding red border when guess is incorrect
         guessInput.style.borderColor = 'red'
+        // adding red font when guess is incorrect 
+        message.style.color = 'red'
         // remove user input from previous guess
         guessInput.value = ''
         setMessage(`${guess} is not correct, ${guessesLeft} guesses left`)
@@ -55,6 +47,20 @@ guessButton.addEventListener('click', function(){
     }
 })
 
+function gameOver(won, msg){
+    let color 
+    // if condition is won then change the color to green, otherwise change it to red
+    won === true ? color = 'green' : color = 'red'
+    guessInput.disabled = true 
+    // adding green border when guess is correct
+    guessInput.style.borderColor = color
+    // adding green font when guess is correct
+    message.style.color = color 
+    // setting message to tell user they won
+    setMessage(msg)
+}
+
+// settting a message to user based on conditions met
 function setMessage(msg, color){
     message.style.color = color
     message.textContent = msg
