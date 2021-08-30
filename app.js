@@ -16,8 +16,14 @@ const message = document.querySelector('.message')
 minNum.textContent = min 
 maxNum.textContent = max
 
-// listening for guess input 
+// Play Again eventlistener, click won't work since it reacts to the whole wrapper and click will bypass the guesses and reload the page
+game.addEventListener('mousedown', function(event){
+    if(event.target.className === 'play-again'){
+        window.location.reload()
+    }
+})
 
+// listening for guess input 
 guessButton.addEventListener('click', function(){
     // the comparison needs to be a Number, not String, so it needs to be parsed as an integer
     let guess = parseInt(guessInput.value)
@@ -58,6 +64,11 @@ function gameOver(won, msg){
     message.style.color = color 
     // setting message to tell user they won
     setMessage(msg)
+    // Play again
+    guessButton.value = 'Play Again?'
+    // adding class to button to add event listener to this new version of this same button
+    // += is appending a class with a name to the button
+    guessButton.className += 'play-again'
 }
 
 // settting a message to user based on conditions met
@@ -65,3 +76,5 @@ function setMessage(msg, color){
     message.style.color = color
     message.textContent = msg
 }
+
+// because Play Again? class has been created after the page loads, event delegation is needed to add an event listener to the parent of that button, then search for the target
