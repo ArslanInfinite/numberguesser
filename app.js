@@ -1,6 +1,6 @@
 let min = 1
 let max = 10
-let winningNum = 2
+let winningNum = getRandomNum(min, max)
 let guessesLeft = 3
 
 // UI elements 
@@ -69,6 +69,12 @@ function gameOver(won, msg){
     // adding class to button to add event listener to this new version of this same button
     // += is appending a class with a name to the button
     guessButton.className += 'play-again'
+}
+
+// get random, winning number 
+// in JS, functions get hoisted to the top during execution so they can be called before they are declared
+function getRandomNum(min, max){
+    return Math.floor(Math.random() * (max - min + 1) + min)
 }
 
 // settting a message to user based on conditions met
